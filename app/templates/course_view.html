@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}{{ course.name }}{% endblock %}
+
+{% block content %}
+    <h2>{{ course.name }}</h2>
+    <p>{{ course.description }}</p>
+
+    <h3>Video Resources</h3>
+    {% set video_resources = resources|selectattr("type", "equalto", "video")|list %}
+    {% if video_resources %}
+        <div class="resource-list">
+            {% for resource in video_resources %}
+                <div class="card resource-card">
+                    <h4>Video {{ loop.index }}</h4>
+                    <a href="{{ resource.link }}" target="_blank" class="btn btn-primary">Watch Video</a>
+                    {% if not resource.completed %}
+                        <a href="{{ url_for('student.complete_resource', resource_id=resource.id) }}" class="btn btn-secondary">Mark as Completed</a>
+                    {% else %}
+                        <span class="badge badge-success">Completed</span>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No video resources available for this course.</p>
+    {% endif %}
+
+    <h3>PDF Resources</h3>
+    {% set pdf_resources = resources|selectattr("type", "equalto", "pdf")|list %}
+    {% if pdf_resources %}
+        <div class="resource-list">
+            {% for resource in pdf_resources %}
+                <div class="card resource-card">
+                    <h4>PDF {{ loop.index }}</h4>
+                    <a href="{{ resource.link }}" target="_blank" class="btn btn-primary">View PDF</a>
+                    {% if not resource.completed %}
+                        <a href="{{ url_for('student.complete_resource', resource_id=resource.id) }}" class="btn btn-secondary">Mark as Completed</a>
+                    {% else %}
+                        <span class="badge badge-success">Completed</span>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No PDF resources available for this course.</p>
+    {% endif %}
+
+    {% if course.assignment_link %}
+        <h3>Assignment</h3>
+        <div class="card">
+            <a href="{{ course.assignment_link }}" target="_blank" class="btn btn-primary">View Assignment</a>
+        </div>
+    {% endif %}
+{% endblock %}

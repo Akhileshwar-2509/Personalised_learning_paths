@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}View Assignments{% endblock %}
+
+{% block content %}
+    <h2>Your Assignments</h2>
+    {% for assignment in assignments %}
+        <div class="card">
+            <h4>{{ assignment.title }}</h4>
+            <p>Course: {{ assignment.course.name }}</p>
+            <p>Due: {{ assignment.due_date }}</p>
+            <a href="#" class="btn">View Assignment</a>
+        </div>
+    {% endfor %}
+{% endblock %}

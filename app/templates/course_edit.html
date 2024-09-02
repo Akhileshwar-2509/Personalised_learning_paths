@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h2>{{ title }}</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.name.label }}
+            {{ form.name() }}
+        </div>
+        <div>
+            {{ form.description.label }}
+            {{ form.description() }}
+        </div>
+        <div>
+            {{ form.video_resources.label }}
+            {{ form.video_resources() }}
+        </div>
+        <div>
+            {{ form.pdf_resources.label }}
+            {{ form.pdf_resources() }}
+        </div>
+        <div>
+            {{ form.assignment_link.label }}
+            {{ form.assignment_link() }}
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+{% endblock %}

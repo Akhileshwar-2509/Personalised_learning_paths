@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Track Progress{% endblock %}
+
+{% block content %}
+    <h2>Your Progress</h2>
+    {% for enrollment in enrollments %}
+        <div class="card">
+            <h4>{{ enrollment.course.name }}</h4>
+            <p>Progress: {{ enrollment.progress }}%</p>
+            <div class="progress-bar" style="width: {{ enrollment.progress }}%"></div>
+        </div>
+    {% endfor %}
+{% endblock %}
